@@ -12,8 +12,7 @@ class Hand
   end
 
   def straight?
-    straight_from_A? ||
-    numbers.max - numbers.min == 4 && all_increments_by_one
+    straight_from_A? || all_increments_by_one
   end
 
   def flush?
