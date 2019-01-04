@@ -66,27 +66,35 @@ class Hand
   end
 
   def high_cards
-    case rank
-    when 1
+    case
+    when straight_flush?
       [numbers.sort.first]
-    when 2
+
+    when four_of_a_kind?
       [frequency.key(4), frequency.key(1)]
-    when 3
+
+    when full_house?
       [frequency.key(3)]
-    when 4
+
+    when flush?
       numbers.sort.reverse
-    when 5
+
+    when straight?
       [numbers.sort.first]
-    when 6
+
+    when three_of_a_kind?
       numbers.sort.reverse.unshift(frequency.key(3)).uniq
-    when 7
+
+    when two_pairs?
       frequency.keys
                .select { |k| frequency[k] == 2 }
                .sort.reverse
                .push(frequency.key(1))
-    when 8
+
+    when pair?
       numbers.sort.reverse.unshift(frequency.key(2)).uniq
-    when 9
+
+    else
       numbers.sort.reverse
     end
   end
