@@ -2,13 +2,22 @@ require './card'
 
 # Determin the type of each hand
 class Hand
-  attr_reader :combo, :cards, :numbers, :suits
+  attr_reader :combo
 
   def initialize(input)
     @combo = input
-    @cards = input.map { |c| Card.new(c) }
-    @numbers = cards.map(&:number)
-    @suits = cards.map(&:suit)
+  end
+
+  def cards
+    combo.map { |c| Card.new(c) }
+  end
+
+  def numbers
+    cards.map(&:number)
+  end
+
+  def suits
+    cards.map(&:suit)
   end
 
   def straight?
