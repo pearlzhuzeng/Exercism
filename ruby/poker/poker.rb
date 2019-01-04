@@ -23,24 +23,18 @@ class Poker
   end
 
   def best_of_two_arrays_of_hands(arr1, arr2)
-    if arr1.first.rank > arr2.first.rank
-       arr2
-    elsif arr1.first.rank < arr2.first.rank
-       arr1
-    else
-      pairs = arr1.first.high_cards.zip(arr2.first.high_cards)
-      compare = []
-      pairs.each do |pair|
-        next if pair[0] == pair[1]
-        compare.push(pair[0] > pair[1])
-      end
-      if compare.length == 0
-        [arr1, arr2].flatten
-      elsif compare[0]
-        arr1
-      else
-        arr2
+    return arr2 if arr1.first.rank > arr2.first.rank
+    return arr1 if arr1.first.rank < arr2.first.rank
+
+    pairs = arr1.first.high_cards.zip(arr2.first.high_cards)
+    pairs.each do |pair|
+      if pair[0] < pair[1]
+        return arr2
+      elsif pair[0] > pair[1]
+        return arr1
       end
     end
+
+    [arr1, arr2].flatten
   end
 end
