@@ -23,10 +23,6 @@ class Hand
     straight? && flush?
   end
 
-  def frequency
-    numbers.each_with_object(Hash.new(0)) { |key, hash| hash[key] += 1 }
-  end
-
   def four_of_a_kind?
     frequency.value?(4)
   end
@@ -99,6 +95,10 @@ class Hand
 
   def all_increments_by_one
     numbers.sort.each_cons(2).all? { |x, y| y == x + 1 }
+  end
+
+  def frequency
+    numbers.each_with_object(Hash.new(0)) { |key, hash| hash[key] += 1 }
   end
 
   def straight_from_A?

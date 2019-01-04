@@ -34,13 +34,6 @@ RSpec.describe Hand do
     expect(h2.straight_flush?).to be true
   end
 
-  it "knows the frequency of each number" do
-    h1 = Hand.new(%w(6S 8D 2H 4S 4H))
-    h2 = Hand.new(%w(4S 4H 8S 8D 8H))
-    expect(h1.frequency).to eq ({6=>1, 8=>1, 2=>1, 4=>2})
-    expect(h2.frequency).to eq ({4=>2, 8=>3})
-  end
-
   it "knows if it's four of a kind" do
     h1 = Hand.new(%w(6S 6D 6H 6S 10H))
     h2 = Hand.new(%w(6S 7S 8S 9S 10S))
