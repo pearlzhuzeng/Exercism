@@ -11,8 +11,9 @@ class Card
 
   def initialize(name)
     @name = name
+    @suit = name.slice(-1)
+
     value = name.split('')[0]
-    @suit = name.slice(-1) 
-    @number = LETTER_NUMBER_PAIRS.key?(value) ? LETTER_NUMBER_PAIRS[value] : value.to_i
+    @number = LETTER_NUMBER_PAIRS[value] || value.to_i
   end
 end
