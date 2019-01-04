@@ -12,8 +12,8 @@ class Hand
   end
 
   def straight?
-    numbers_where_A_is_1 = numbers.map { |n| n == 14 ? 1 : n}
-    numbers_where_A_is_1.max - numbers_where_A_is_1.min == 4 && all_increments_by_one
+    straight_from_A? ||
+    numbers.max - numbers.min == 4 && all_increments_by_one
   end
 
   def flush?
@@ -99,7 +99,11 @@ class Hand
   private
 
   def all_increments_by_one
-    new_numbers = numbers.map { |n| n == 14 ? 1 : n}
-    new_numbers.sort.each_cons(2).all? { |x, y| y == x + 1 }
+    numbers.sort.each_cons(2).all? { |x, y| y == x + 1 }
+  end
+
+  def straight_from_A?
+    sorted_numbers = numbers.sort
+    sorted_numbers.last == 14 && sorted_numbers.slice(0..3).each_cons(2).all? { |x, y| y == x + 1 }
   end
 end
